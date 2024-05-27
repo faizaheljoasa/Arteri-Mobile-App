@@ -7,6 +7,8 @@ import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 import { Redirect, router, Link } from "expo-router";
 
+import { createUser } from '../../lib/appwrite'
+
 const SignUp = () => {
   const [form, setForm] = useState({
     username: '',
@@ -17,7 +19,7 @@ const SignUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const submit = () => {
-    router.push('/home')
+    createUser()
   }
 
   return (
