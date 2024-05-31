@@ -28,6 +28,15 @@ const GlobalProvider = ({ children }) => {
       })
   }, []);
 
+  const updateUser = async () => {
+    try {
+      const currentUser = await getCurrentUser();
+      setUser(currentUser);
+    } catch (error) {
+      console.error('Failed to fetch user:', error);
+    }
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -36,6 +45,7 @@ const GlobalProvider = ({ children }) => {
         user,
         setUser,
         isLoading,
+        updateUser,
       }}
     >
       {children}

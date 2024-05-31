@@ -4,11 +4,11 @@ import { View, Text, Image } from "react-native"
 
 import { icons } from "../constants"
 
-const HeaderMenu = ({ title, isLoading }) => {
+const HeaderMenu = ({ title, isLoading, backButton, menuButton }) => {
   return (
     <View className="flex flex-row w-full p-5 justify-between items-center">
       <TouchableOpacity
-        onPress={() => router.push('/home')}
+        onPress={backButton}
         activeOpacity={0.7}
         disabled={isLoading}
       >
@@ -23,7 +23,7 @@ const HeaderMenu = ({ title, isLoading }) => {
         {title}
       </Text>
       <TouchableOpacity
-        onPress={() => router.push('/home')}
+        onPress={menuButton}
         activeOpacity={0.7}
         disabled={isLoading}
       >

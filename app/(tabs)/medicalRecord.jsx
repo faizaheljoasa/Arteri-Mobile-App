@@ -7,7 +7,7 @@ import { images } from "../../constants"
 import HeaderMenu from "../../components/HeaderMenu";
 import { useState } from "react";
 
-const medicalRecord = () => {
+const MedicalRecord = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   return (
@@ -20,6 +20,8 @@ const medicalRecord = () => {
             <HeaderMenu
               title="Medical Record"
               isLoading={isSubmitting}
+              backButton={() => router.push('/home')}
+              menuButton={() => router.push('/home')}
             />
             <View className="w-full justify-center items-center min-h-[75vh] px-4">
               <Text className="text-2xl text-purple-200 font-psemibold">
@@ -37,4 +39,4 @@ const medicalRecord = () => {
   )
 }
 
-export default medicalRecord
+export default MedicalRecord

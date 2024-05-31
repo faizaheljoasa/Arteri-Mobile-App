@@ -120,6 +120,70 @@ const TabsLayout = () => {
             )
           }}
         />
+        <Tabs.Screen
+          name="alatSetting"
+          options={{
+            title: "Alat Setting",
+            headerShown: false,
+            tabBarButton: () => null,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon 
+                icon={icons.setting}
+                color={color}
+                name="Alat Setting"
+                focused={focused}
+              />
+            )
+          }}
+        />
+        <Tabs.Screen
+          name="akunSetting"
+          options={{
+            title: "Akun Setting",
+            headerShown: false,
+            tabBarButton: () => null,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon 
+                icon={icons.setting}
+                color={color}
+                name="Akun Setting"
+                focused={focused}
+              />
+            )
+          }}
+        />
+        <Tabs.Screen
+          name="gantiPassword"
+          options={{
+            title: "Ganti Password",
+            headerShown: false,
+            tabBarButton: () => null,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon 
+                icon={icons.setting}
+                color={color}
+                name="Ganti Password"
+                focused={focused}
+              />
+            )
+          }}
+        />
+        <Tabs.Screen
+          name="gantiUsername"
+          options={{
+            title: "Ganti Username",
+            headerShown: false,
+            tabBarButton: () => null,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon 
+                icon={icons.setting}
+                color={color}
+                name="Ganti Username"
+                focused={focused}
+              />
+            )
+          }}
+        />
       </Tabs>
     </>
   )

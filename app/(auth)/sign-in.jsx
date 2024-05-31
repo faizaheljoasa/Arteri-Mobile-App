@@ -56,6 +56,7 @@ const SignIn = () => {
 
           <FormField 
             title="Email"
+            textStyle="text-white"
             value={form.email}
             handleChangeText={(event) => setForm({ ...form, email: event })}
             otherStyles="mt-7"
@@ -64,6 +65,7 @@ const SignIn = () => {
 
           <FormField 
             title="Password"
+            textStyle="text-white"
             value={form.password}
             handleChangeText={(event) => setForm({ ...form, password: event })}
             otherStyles="mt-7"
@@ -72,7 +74,7 @@ const SignIn = () => {
           <CustomButton 
             title="Sign in"
             handlePress={submit}
-            containerStyles="mt-7"
+            containerStyles="mt-7 bg-secondary-200"
             isLoading={isSubmitting}
           />
 

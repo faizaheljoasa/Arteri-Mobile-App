@@ -1,13 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import { Image, ImageBackground, ScrollView, Text, View } from "react-native";
-import { Link, Redirect, router } from "expo-router";
+import { Redirect, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { images } from "../../constants"
-import HeaderMenu from "../../components/HeaderMenu";
+import { icons, images } from "../../constants"
 import { useState } from "react";
+import HeaderMenu from "../../components/HeaderMenu";
+import MenuButton from "../../components/MenuButton";
 
-const HasilTes = () => {
+const AlatSetting = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   return (
@@ -18,15 +19,13 @@ const HasilTes = () => {
         <SafeAreaView className="h-full">
           <ScrollView contentContainerStyle={{ height: '100%' }}>
             <HeaderMenu 
-              title="Hasil Tes"
+              title="Pengaturan Alat Arteri"
               isLoading={isSubmitting}
-              backButton={() => router.push('/home')}
+              backButton={() => router.push('/pengaturan')}
               menuButton={() => router.push('/home')}
             />
-            <View className="w-full justify-center items-center min-h-[75vh] px-4">
-              <Text className="text-2xl text-purple-200 font-psemibold">
-              Hasil Tes
-              </Text>
+            <View className="w-full items-center h-full px-4">
+              <Text>Pengaturan Alat</Text>
             </View>
           </ScrollView>
           <StatusBar 
@@ -39,4 +38,4 @@ const HasilTes = () => {
   )
 }
 
-export default HasilTes
+export default AlatSetting

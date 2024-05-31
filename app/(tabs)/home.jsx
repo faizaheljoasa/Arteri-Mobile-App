@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { Image, ImageBackground, ScrollView, Text, View } from "react-native";
-import { Redirect, router } from "expo-router";
+import { Redirect, router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { icons, images } from "../../constants"
@@ -9,23 +9,12 @@ import MenuButton from "../../components/MenuButton";
 import { getCurrentUser } from "../../lib/appwrite";
 import { useEffect, useState } from "react";
 
+import { useGlobalContext } from "../../context/GlobalProvider";
+
 const Home = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const currentUser = await getCurrentUser();
-        setUser(currentUser);
-      } catch (error) {
-        console.error('Failed to fetch user:', error);
-      }
-    };
-
-    fetchUser();
-  }, []);
+  const { user } = useGlobalContext();
 
   return (
     <View className="bg-[#F7DCB9]">

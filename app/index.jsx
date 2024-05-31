@@ -20,7 +20,7 @@ export default function App() {
       >
         <SafeAreaView className="h-full">
           <ScrollView contentContainerStyle={{ height: '100%' }}>
-            <View className="w-full justify-center items-center min-h-[95vh] px-4">
+            <View className="w-full justify-center items-center min-h-[87vh] px-4">
               <Image 
                 source={images.logo}
                 className="w-[240px] h-[114px]"
@@ -53,7 +53,7 @@ export default function App() {
               <CustomButton 
                 title="Start with Arteri"
                 handlePress={() => router.push('/sign-in')}
-                containerStyles="w-full mt-7"
+                containerStyles="w-full mt-7 bg-secondary-200"
               />
             </View>
           </ScrollView>

@@ -18,6 +18,10 @@ import statistikArteri from "../assets/icons/statistik-arteri.png";
 import setting from "../assets/icons/setting.png";
 import tutorialArteri from "../assets/icons/tutorial-arteri.png";
 import recordArteri from "../assets/icons/record-arteri.png";
+import account from "../assets/icons/account.png";
+import idCard from "../assets/icons/id-card.png";
+import padLock from "../assets/icons/padlock.png";
+import settings from "../assets/icons/settings.png";
 
 export default {
   play,
@@ -40,4 +44,8 @@ export default {
   statistikArteri,
   tutorialArteri,
   recordArteri,
+  account,
+  idCard,
+  padLock,
+  settings,
 };
