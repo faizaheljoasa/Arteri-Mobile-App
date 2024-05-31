@@ -112,7 +112,7 @@ const TabsLayout = () => {
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon 
-                icon={icons.search}
+                icon={icons.setting}
                 color={color}
                 name="Pengaturan"
                 focused={focused}

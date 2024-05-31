@@ -4,8 +4,12 @@ import { Redirect, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { images } from "../../constants"
+import { useState } from "react";
+import HeaderMenu from "../../components/HeaderMenu";
 
 const pengaturan = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   return (
     <View className="bg-[#F7DCB9]">
       <ImageBackground
@@ -13,7 +17,11 @@ const pengaturan = () => {
       >
         <SafeAreaView className="h-full">
           <ScrollView contentContainerStyle={{ height: '100%' }}>
-            <View className="w-full justify-center items-center min-h-[95vh] px-4">
+            <HeaderMenu 
+              title="Pengaturan"
+              isLoading={isSubmitting}
+            />
+            <View className="w-full justify-center items-center min-h-[75vh] px-4">
               <Text className="text-2xl text-purple-200 font-psemibold">
                 Pengaturan
               </Text>

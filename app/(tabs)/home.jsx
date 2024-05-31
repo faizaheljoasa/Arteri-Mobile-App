@@ -5,10 +5,27 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { icons, images } from "../../constants"
 import MenuButton from "../../components/MenuButton";
-import { useState } from "react";
+
+import { getCurrentUser } from "../../lib/appwrite";
+import { useEffect, useState } from "react";
 
 const Home = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const currentUser = await getCurrentUser();
+        setUser(currentUser);
+      } catch (error) {
+        console.error('Failed to fetch user:', error);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   return (
     <View className="bg-[#F7DCB9]">
@@ -18,9 +35,26 @@ const Home = () => {
         <SafeAreaView className="h-full">
           <ScrollView contentContainerStyle={{ height: '100vh' }}>
             <View className="w-full justify-center items-center min-h-[95vh] px-4">
+              <View className="flex flex-row w-full justify-between items-center mt-2">
+                <View className="flex flex-col">
+                  <Text className="text-xs text-purple font-bold">Salam Sehat,</Text>
+                  {user ? (
+                    <Text className="text-md text-gray-700 font-bold">
+                      {'     '}{user.username}
+                    </Text>
+                  ) : (
+                    <Text>{'     '}Bapak/Ibu</Text>
+                  )}
+                </View>
+                <Image 
+                  source={icons.notification}
+                  className="w-[32px] h-[32px]"
+                  resizeMode="contain"
+                />
+              </View>
               <Image 
                 source={images.heroMenu}
-                className="w-[340px] h-[184px] mt-20"
+                className="w-[340px] h-[184px] mt-6"
                 resizeMode="contain"
               />
 
@@ -70,7 +104,7 @@ const Home = () => {
                 handlePress={() => router.push('/pengaturan')}
                 containerStyles="mt-7 mb-10"
                 isLoading={isSubmitting}
-                icon={icons.search}
+                icon={icons.setting}
               />
             </View>
           </ScrollView>

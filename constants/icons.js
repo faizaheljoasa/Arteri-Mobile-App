@@ -4,6 +4,7 @@ import plus from "../assets/icons/plus.png";
 import profile from "../assets/icons/profile.png";
 import leftArrow from "../assets/icons/left-arrow.png";
 import menu from "../assets/icons/menu.png";
+import notification from "../assets/icons/notification.png";
 import search from "../assets/icons/search.png";
 import upload from "../assets/icons/upload.png";
 import rightArrow from "../assets/icons/right-arrow.png";
@@ -14,6 +15,7 @@ import play from "../assets/icons/play.png";
 import testArteri from "../assets/icons/test-arteri.png";
 import profilArteri from "../assets/icons/profile-arteri.png";
 import statistikArteri from "../assets/icons/statistik-arteri.png";
+import setting from "../assets/icons/setting.png";
 import tutorialArteri from "../assets/icons/tutorial-arteri.png";
 import recordArteri from "../assets/icons/record-arteri.png";
 
@@ -25,6 +27,7 @@ export default {
   profile,
   leftArrow,
   menu,
+  notification,
   search,
   upload,
   rightArrow,
@@ -33,6 +36,7 @@ export default {
   eye,
   testArteri,
   profilArteri,
+  setting,
   statistikArteri,
   tutorialArteri,
   recordArteri,
