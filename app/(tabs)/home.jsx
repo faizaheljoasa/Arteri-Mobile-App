@@ -26,7 +26,7 @@ const Home = () => {
 
               <View className="relative mt-5">
                 <Text className="text-3xl text-purple font-bold text-center">
-                  Selamat Datang Kembali di {' '}
+                  {' '} Selamat Datang Kembali di {' '}
                   <Text className="text-secondary-200">Arteri</Text>
                 </Text>
 
