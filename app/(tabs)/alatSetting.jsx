@@ -7,6 +7,7 @@ import { icons, images } from "../../constants"
 import { useState } from "react";
 import HeaderMenu from "../../components/HeaderMenu";
 import MenuButton from "../../components/MenuButton";
+import HeaderProfile from "../../components/HeaderProfile";
 
 const AlatSetting = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -25,6 +26,7 @@ const AlatSetting = () => {
               menuButton={() => router.push('/home')}
             />
             <View className="w-full items-center h-full px-4">
+              <HeaderProfile />
               <Text>Pengaturan Alat</Text>
             </View>
           </ScrollView>

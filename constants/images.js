@@ -8,5 +8,7 @@ import texture from "../assets/images/texture.png"
 import logo from "../assets/images/logo.png"
 import hero from "../assets/images/hero.png"
 import heroMenu from "../assets/images/heroMenu.png"
+import photoProfile from "../assets/images/photoProfile.png"
+import togglePower from "../assets/images/togglePower.png"
 
-export default { profile, thumbnail, cards, path, logo, logoSmall, empty, texture, hero, heroMenu};
+export default { profile, photoProfile, thumbnail, cards, path, logo, logoSmall, empty, texture, hero, heroMenu, togglePower};

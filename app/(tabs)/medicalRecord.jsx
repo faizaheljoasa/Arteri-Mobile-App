@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants"
 import HeaderMenu from "../../components/HeaderMenu";
 import { useState } from "react";
+import HeaderProfile from "../../components/HeaderProfile";
 
 const MedicalRecord = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -23,10 +24,9 @@ const MedicalRecord = () => {
               backButton={() => router.push('/home')}
               menuButton={() => router.push('/home')}
             />
-            <View className="w-full justify-center items-center min-h-[75vh] px-4">
-              <Text className="text-2xl text-purple-200 font-psemibold">
-                Medical Record
-              </Text>
+            <View className="w-full items-center h-full px-4">
+              <HeaderProfile />
+              <Text>Medical Record</Text>
             </View>
           </ScrollView>
           <StatusBar 
