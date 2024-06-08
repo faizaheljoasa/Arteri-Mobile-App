@@ -8,10 +8,12 @@ import HeaderMenu from "../../components/HeaderMenu";
 import { useState } from "react";
 import HeaderProfile from "../../components/HeaderProfile";
 import CustomButton from "../../components/CustomButton";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const HasilTes = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [activeSection, setActiveSection] = useState('Tekanan Darah');
+  const { examination } = useGlobalContext();
 
   return (
     <View className="bg-[#F7DCB9]">
@@ -64,7 +66,12 @@ const HasilTes = () => {
                     <Text className="text-2xl font-bold text-purple mt-2">Mulai Tes</Text>
                   </View>
                   <View className="w-full bg-purple-200 flex flex-col p-4 rounded-2xl mt-4">
-                    <Text className="text-xl text-secondary-100 font-bold">TETAP PERTAHANKAN</Text>
+                    {examination ? (
+                      <Text className="text-xl text-secondary-100 font-bold">{examination.information}</Text>
+                    ) : (
+                      <Text className="text-xl text-secondary-100 font-bold"> - </Text>
+                    )}
+                    
                     <View className="flex w-full flex-row justify-start items-center gap-4">
                       <Image 
                         source={icons.speed}
@@ -73,7 +80,11 @@ const HasilTes = () => {
                       />
                       <View className="flex flex-row">
                         <Text className="text-md text-white">Tekanan Darah: </Text>
-                        <Text className="text-md text-white font-bold">{'   '}90 mmHg</Text>
+                        {examination ? (
+                          <Text className="text-md text-white font-bold">{'   '}{examination.bloodPressure} mmHg</Text>
+                        ) : (
+                          <Text className="text-md text-white font-bold">{'   '} - mmHg</Text>
+                        )}
                       </View>
                     </View>
                   </View>
@@ -102,7 +113,12 @@ const HasilTes = () => {
                   <Text className="text-2xl font-bold text-purple mt-2">Mulai Tes</Text>
                 </View>
                 <View className="w-full bg-purple-200 flex flex-col p-4 rounded-2xl mt-4">
-                  <Text className="text-xl text-secondary-100 font-bold">SATURASI OKSIGEN NORMAL</Text>
+                  {examination ? (
+                    <Text className="text-xl text-secondary-100 font-bold">{examination.information}</Text>
+                  ) : (
+                    <Text className="text-xl text-secondary-100 font-bold"> - </Text>
+                  )}
+
                   <View className="flex w-full flex-row justify-start items-center gap-4">
                     <Image 
                       source={icons.speed}
@@ -111,7 +127,12 @@ const HasilTes = () => {
                     />
                     <View className="flex flex-row">
                       <Text className="text-md text-white">Saturasi Oksigen: </Text>
-                      <Text className="text-md text-white font-bold">{'   '}95 %</Text>
+                      {examination ? (
+                        <Text className="text-md text-white font-bold">{'   '}{examination.oxygenSaturation} %</Text>
+                      ) : (
+                        <Text className="text-md text-white font-bold">{'   ' } - %</Text>
+                      )}
+
                     </View>
                   </View>
                 </View>

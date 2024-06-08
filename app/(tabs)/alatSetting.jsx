@@ -25,28 +25,6 @@ const AlatSetting = () => {
   const [minutes, setMinutes] = useState();
   const [seconds, setSeconds] = useState();
 
-  useEffect(() => {
-    const fetchUserSettings = async () => {
-      try {
-        setLoading(true);
-        const user = await getCurrentUser();
-        if (user.settingArteriTools) {
-          const settings = user.settingsArteriTools;
-          setMode(settings.mode);
-          setSpeed(settings.speed);
-          setAngle(settings.angle);
-          setTime(settings.time);
-        }
-      } catch (error) {
-        console.error('Error fetching user settings:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserSettings();
-  }, []);
-
   const handleUpdateSettings = async () => {
     try {
       setLoading(true);
@@ -75,6 +53,7 @@ const AlatSetting = () => {
 
   const stop = async () => {
     try {
+      setIsSubmitting(true);
       const settings = {
         mode: 'off',
         speed: 0,
@@ -87,7 +66,7 @@ const AlatSetting = () => {
       console.error('Error updating settings:', error);
       alert('Failed to update settings');
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -109,6 +88,7 @@ const AlatSetting = () => {
               <TouchableOpacity
                 onPress={toggleSwitch}
                 activeOpacity={0.7}
+                disabled={loading}
               >
                 <Image
                   source={images.togglePower}

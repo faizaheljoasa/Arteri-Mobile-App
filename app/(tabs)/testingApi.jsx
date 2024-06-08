@@ -8,7 +8,7 @@ import { useState } from "react";
 import HeaderMenu from "../../components/HeaderMenu";
 import MenuButton from "../../components/MenuButton";
 
-const Pengaturan = () => {
+const TestingApi = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   return (
@@ -21,32 +21,16 @@ const Pengaturan = () => {
             <HeaderMenu 
               title="Pengaturan"
               isLoading={isSubmitting}
-              backButton={() => router.push('/home')}
+              backButton={() => router.push('/pengaturan')}
               menuButton={() => router.push('/home')}
             />
             <View className="w-full items-center h-full px-4">
               <MenuButton
-                title="Pengaturan Alat"
-                handlePress={() => router.push('/alatSetting')}
+                title="API Hasil Test"
+                handlePress={() => router.push('/apiHasilTest')}
                 containerStyles="mt-7"
                 isLoading={isSubmitting}
-                icon={icons.settings}
-              />
-
-              <MenuButton 
-                title="Pengaturan Akun"
-                handlePress={() => router.push('/akunSetting')}
-                containerStyles="mt-7"
-                isLoading={isSubmitting}
-                icon={icons.account}
-              />
-
-              <MenuButton 
-                title="Testing API"
-                handlePress={() => router.push('/testingApi')}
-                containerStyles="mt-7"
-                isLoading={isSubmitting}
-                icon={icons.api}
+                icon={icons.testArteri}
               />
             </View>
           </ScrollView>
@@ -60,4 +44,4 @@ const Pengaturan = () => {
   )
 }
 
-export default Pengaturan
+export default TestingApi

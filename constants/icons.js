@@ -23,6 +23,7 @@ import idCard from "../assets/icons/id-card.png";
 import padLock from "../assets/icons/padlock.png";
 import settings from "../assets/icons/settings.png";
 import speed from "../assets/icons/speed.png";
+import api from "../assets/icons/api.png";
 
 export default {
   play,
@@ -50,4 +51,5 @@ export default {
   padLock,
   settings,
   speed,
+  api,
 };

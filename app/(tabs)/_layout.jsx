@@ -184,6 +184,38 @@ const TabsLayout = () => {
             )
           }}
         />
+        <Tabs.Screen
+          name="testingApi"
+          options={{
+            title: "Testing API",
+            headerShown: false,
+            tabBarButton: () => null,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon 
+                icon={icons.setting}
+                color={color}
+                name="Testing API"
+                focused={focused}
+              />
+            )
+          }}
+        />
+        <Tabs.Screen
+          name="apiHasilTest"
+          options={{
+            title: "API Hasil Test",
+            headerShown: false,
+            tabBarButton: () => null,
+            tabBarIcon: ({ color, focused }) => (
+              <TabIcon 
+                icon={icons.setting}
+                color={color}
+                name="API Hasil Test"
+                focused={focused}
+              />
+            )
+          }}
+        />
       </Tabs>
     </>
   )
