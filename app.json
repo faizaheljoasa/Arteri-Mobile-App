@@ -33,6 +33,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "notification": {
+      "icon": "./assets/icons/notification.png",
+      "color": "#000000",
+      "androidMode": "default",
+      "androidCollapsedTitle": "New notifications"
     }
   }
 }

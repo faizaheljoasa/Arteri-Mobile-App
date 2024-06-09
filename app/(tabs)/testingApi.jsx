@@ -19,7 +19,7 @@ const TestingApi = () => {
         <SafeAreaView className="h-full">
           <ScrollView contentContainerStyle={{ height: '100%' }}>
             <HeaderMenu 
-              title="Pengaturan"
+              title="Testing API"
               isLoading={isSubmitting}
               backButton={() => router.push('/pengaturan')}
               menuButton={() => router.push('/home')}

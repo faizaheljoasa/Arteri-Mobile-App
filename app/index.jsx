@@ -7,9 +7,15 @@ import { images } from "../constants"
 import CustomButton from "../components/CustomButton";
 
 import { useGlobalContext} from "../context/GlobalProvider"
+import { useEffect } from "react";
+import { scheduleWeeklyNotifications } from "../lib/notification";
 
 export default function App() {
   const {isLoading, isLoggedIn} = useGlobalContext();
+
+  useEffect(() => {
+    scheduleWeeklyNotifications();
+  }, []);
 
   if(!isLoading && isLoggedIn) return <Redirect href="/home" />
 

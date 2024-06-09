@@ -71,6 +71,15 @@ const GrafikProgres = () => {
               <View className="flex justify-center items-center mt-4 mb-6">
                 {medicalRecord ? (
                   <>
+                    <View className="flex w-full justify-start items-center bg-amber-100 rounded-xl p-4">
+                      <Text className="text-lg text-black-100"> 
+                        Tingkat {' '} 
+                        <Text className="text-purple-800 font-bold">Tekanan Darah</Text> 
+                        {' '} dan Tingkat {' '}
+                        <Text className="text-red-500 font-bold">Saturasi Oksigen</Text> 
+                        {' '} Pasien Arteri
+                      </Text>
+                    </View>
                     <LineChart
                       data={chartData}
                       width={screenWidth - 32}
@@ -82,7 +91,7 @@ const GrafikProgres = () => {
                         backgroundGradientFrom: '#FFE0B5', 
                         backgroundGradientTo: '#FFF2D7', 
                         decimalPlaces: 0,
-                        color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                        color: (opacity = 1) => `rgba(226, 162, 0, ${opacity})`,
                         labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                         propsForDots: {
                           r: '4',
@@ -98,10 +107,10 @@ const GrafikProgres = () => {
                       onDataPointClick={handleDataPointClick}
                     />
                     {selectedData && (
-                      <View className="absolute bg-white bg-opacity-70 rounded-lg p-4 top-[20px] left-[10px]">
-                        <Text style={{ color: 'black' }}>{`Date: ${selectedData.label}`}</Text>
-                        <Text style={{ color: 'black' }}>{`Value: ${selectedData.value}`}</Text>
-                        <Text style={{ color: 'black' }}>{`Type: ${selectedData.type}`}</Text>
+                      <View className="absolute bg-purple-200 bg-opacity-70 rounded-lg p-4 top-[20px] left-[10px]">
+                        <Text className="text-white">{`Date: ${selectedData.label}`}</Text>
+                        <Text className="text-white">{`Value: ${selectedData.value}`}</Text>
+                        <Text className="text-white">{`Type: ${selectedData.type}`}</Text>
                       </View>
                     )}
                     <View className="flex-row justify-center items-center mt-4">

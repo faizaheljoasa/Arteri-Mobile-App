@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Image, ImageBackground, ScrollView, Text, View } from "react-native";
+import { Image, ImageBackground, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Redirect, router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -11,10 +11,28 @@ import { useEffect, useState } from "react";
 
 import { useGlobalContext } from "../../context/GlobalProvider";
 
+import * as Notifications from 'expo-notifications';
+import * as Device from 'expo-device';
+import { scheduleWeeklyNotifications } from "../../lib/notification";
+
 const Home = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const { user } = useGlobalContext();
+
+  useEffect(() => {
+    scheduleWeeklyNotifications();
+
+    if (Device.isDevice) {
+      Notifications.requestPermissionsAsync().then(({ status }) => {
+        if (status !== 'granted') {
+          alert('Please enable notifications in settings');
+        }
+      });
+    } else {
+      alert('Must use physical device for notifications');
+    }
+  }, []);
 
   return (
     <View className="bg-[#F7DCB9]">
@@ -35,11 +53,16 @@ const Home = () => {
                     <Text>{'     '}Bapak/Ibu</Text>
                   )}
                 </View>
-                <Image 
-                  source={icons.notification}
-                  className="w-[32px] h-[32px]"
-                  resizeMode="contain"
-                />
+                <TouchableOpacity
+                  onPress={() => router.replace('/notification')}
+                  activeOpacity={0.7}
+                >
+                  <Image 
+                    source={icons.notification}
+                    className="w-[32px] h-[32px]"
+                    resizeMode="contain"
+                  />
+                </TouchableOpacity>
               </View>
               <Image 
                 source={images.heroMenu}
