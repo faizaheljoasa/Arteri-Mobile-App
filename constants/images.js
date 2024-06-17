@@ -10,5 +10,6 @@ import hero from "../assets/images/hero.png"
 import heroMenu from "../assets/images/heroMenu.png"
 import photoProfile from "../assets/images/photoProfile.png"
 import togglePower from "../assets/images/togglePower.png"
+import thumbnailVideo from "../assets/images/thumbnailVideo.png"
 
-export default { profile, photoProfile, thumbnail, cards, path, logo, logoSmall, empty, texture, hero, heroMenu, togglePower};
+export default { profile, photoProfile, thumbnail, cards, path, logo, logoSmall, empty, texture, hero, heroMenu, togglePower, thumbnailVideo};

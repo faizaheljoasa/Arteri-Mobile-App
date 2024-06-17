@@ -23,7 +23,9 @@ const GrafikProgres = () => {
   };
 
   const validRecords = medicalRecord.filter(item => {
-    return item.bloodPressure && item.oxygenSaturation && !isNaN(item.bloodPressure) && !isNaN(item.oxygenSaturation) && new Date(item.date) !== "Invalid Date";
+    return item.bloodPressure && item.oxygenSaturation && item.heartRate && 
+           !isNaN(item.bloodPressure) && !isNaN(item.oxygenSaturation) && !isNaN(item.heartRate) &&
+           new Date(item.date) !== "Invalid Date";
   }).slice(-5);
 
   const chartData = {
@@ -40,6 +42,12 @@ const GrafikProgres = () => {
         color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`,
         strokeWidth: 2,
         legend: "Saturasi Oksigen",
+      },
+      {
+        data: validRecords.map(item => item.heartRate),
+        color: (opacity = 1) => `rgba(0, 128, 0, ${opacity})`,
+        strokeWidth: 2,
+        legend: "Detak Jantung",
       }
     ],
   };
@@ -48,7 +56,7 @@ const GrafikProgres = () => {
     const { dataset, index } = data;
     const selectedValue = dataset.data[index];
     const label = chartData.labels[index];
-    const dataType = dataset.legend; // Menyimpan jenis data (Tekanan Darah atau Saturasi Oksigen)
+    const dataType = dataset.legend; // Menyimpan jenis data (Tekanan Darah, Saturasi Oksigen, atau Detak Jantung)
     setSelectedData({ value: selectedValue, label, type: dataType });
     setTimeout(() => {
       setSelectedData(null); // Menghapus data terpilih setelah 2 detik
@@ -77,6 +85,8 @@ const GrafikProgres = () => {
                         <Text className="text-purple-800 font-bold">Tekanan Darah</Text> 
                         {' '} dan Tingkat {' '}
                         <Text className="text-red-500 font-bold">Saturasi Oksigen</Text> 
+                        {' '} serta Tingkat {' '}
+                        <Text className="text-green-500 font-bold">Detak Jantung</Text> 
                         {' '} Pasien Arteri
                       </Text>
                     </View>
@@ -115,12 +125,16 @@ const GrafikProgres = () => {
                     )}
                     <View className="flex-row justify-center items-center mt-4">
                       <View className="flex-row items-center">
-                        <View style={{ width: 20, height: 20, backgroundColor: 'rgba(134, 65, 244, 1)', marginRight: 5, borderRadius: 16, }} />
-                        <Text>Tekanan Darah</Text>
+                        <View style={{ width: 10, height: 10, backgroundColor: 'rgba(134, 65, 244, 1)', marginRight: 5, borderRadius: 16, }} />
+                        <Text className="text-xs">Tekanan Darah</Text>
                       </View>
                       <View className="flex-row items-center ml-4">
-                        <View style={{ width: 20, height: 20, backgroundColor: 'rgba(255, 0, 0, 1)', marginRight: 5, borderRadius: 16, }} />
-                        <Text>Saturasi Oksigen</Text>
+                        <View style={{ width: 10, height: 10, backgroundColor: 'rgba(255, 0, 0, 1)', marginRight: 5, borderRadius: 16, }} />
+                        <Text className="text-xs">Saturasi Oksigen</Text>
+                      </View>
+                      <View className="flex-row items-center ml-4">
+                        <View style={{ width: 10, height: 10, backgroundColor: 'rgba(0, 128, 0, 1)', marginRight: 5, borderRadius: 16, }} />
+                        <Text className="text-xs">Detak Jantung</Text>
                       </View>
                     </View>
                   </>
@@ -137,7 +151,7 @@ const GrafikProgres = () => {
         </SafeAreaView>
       </ImageBackground>
     </View>
-  )
+  );
 }
 
 export default GrafikProgres;

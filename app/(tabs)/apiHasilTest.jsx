@@ -18,9 +18,9 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 const ApiHasilTest = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [information, setInformation] = useState('');
   const [bloodPressure, setBloodPressure] = useState(0);
   const [oxygenSaturation, setOxygenSaturation] = useState(0);
+  const [heartRate, setHeartRate] = useState(0);
 
   const { updateExamination, updateMedicalRecord } = useGlobalContext();
 
@@ -29,16 +29,16 @@ const ApiHasilTest = () => {
       setIsSubmitting(true);
 
       const newData = {
-        information: information,
         bloodPressure: parseInt(bloodPressure),
         oxygenSaturation: parseInt(oxygenSaturation),
+        heartRate: parseInt(heartRate),
         date: new Date().toISOString(),
       }
 
       const hasilTest = {
-        information: information,
         bloodPressure: parseInt(bloodPressure),
-        oxygenSaturation: parseInt(oxygenSaturation)
+        oxygenSaturation: parseInt(oxygenSaturation),
+        heartRate: parseInt(heartRate),
       };
 
       await createData(newData);
@@ -49,9 +49,9 @@ const ApiHasilTest = () => {
       await updateExamination();
       await updateMedicalRecord();
 
-      setInformation('');
       setBloodPressure('');
       setOxygenSaturation('');
+      setHeartRate('');
     } catch (error) {
       console.error('Error updating hasil test:', error);
       Alert.alert('Failed to update hasil test');
@@ -76,13 +76,6 @@ const ApiHasilTest = () => {
               <View className="flex w-full justify-center items-center">
                 <TextInput
                   className="border border-gray-300 rounded-lg p-6 text-center w-full text-white mb-2 bg-purple-100"
-                  keyboardType="default"
-                  value={information ? String(information) : ''}
-                  onChangeText={setInformation}
-                  placeholder="Information"
-                />
-                <TextInput
-                  className="border border-gray-300 rounded-lg p-6 text-center w-full text-white mb-2 bg-purple-100"
                   keyboardType="numeric"
                   value={bloodPressure ? String(bloodPressure) : 0}
                   onChangeText={setBloodPressure}
@@ -94,6 +87,13 @@ const ApiHasilTest = () => {
                   value={oxygenSaturation ? String(oxygenSaturation) : 0}
                   onChangeText={setOxygenSaturation}
                   placeholder="Saturasi Oksigen"
+                />
+                <TextInput
+                  className="border border-gray-300 rounded-lg p-6 text-center w-full text-white mb-2 bg-purple-100"
+                  keyboardType="numeric"
+                  value={heartRate ? String(heartRate) : 0}
+                  onChangeText={setHeartRate}
+                  placeholder="Denyut Jantung"
                 />
               </View>
 

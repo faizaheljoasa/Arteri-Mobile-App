@@ -28,10 +28,17 @@ const AlatSetting = () => {
   const handleUpdateSettings = async () => {
     try {
       setLoading(true);
-      const time = hours * 3600 + minutes * 60 + seconds;
+
+      const hoursInt = parseInt(hours) || 0;
+      const minutesInt = parseInt(minutes) || 0;
+      const secondsInt = parseInt(seconds) || 0;
+
+      const time = (hoursInt * 3600) + (minutesInt * 60) + secondsInt;
+
+      setMode('on');
 
       const settings = {
-        mode,
+        mode: 'on',
         speed: parseInt(speed),
         angle: parseInt(angle),
         time: parseInt(time)
@@ -44,11 +51,6 @@ const AlatSetting = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const toggleSwitch = async () => {
-    setMode('on');
-    await handleUpdateSettings();
   };
 
   const stop = async () => {
@@ -86,7 +88,7 @@ const AlatSetting = () => {
 
               <Text className="text-lg font-bold mb-4 mt-4">Mulai Pemeriksaan</Text>
               <TouchableOpacity
-                onPress={toggleSwitch}
+                onPress={handleUpdateSettings}
                 activeOpacity={0.7}
                 disabled={loading}
               >
