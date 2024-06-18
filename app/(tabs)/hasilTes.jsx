@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Image, ImageBackground, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Link, Redirect, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -12,8 +12,11 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 
 const HasilTes = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [refreshing, setRefreshing] = useState(false);
   const [activeSection, setActiveSection] = useState('Tekanan Darah');
   const { examination } = useGlobalContext();
+
+  const { updateExamination, updateMedicalRecord } = useGlobalContext();
 
   const [bloodPressureFontColor, setBloodPressureFontColor] = useState("");
   const [oxygenSaturationFontColor, setOxygenSaturationFontColor] = useState("");
@@ -23,8 +26,33 @@ const HasilTes = () => {
   const [oxygenSaturationInformation, setOxygenSaturationInformation] = useState("");
   const [heartRateInformation, setHeartRateInformation] = useState("");
 
+  const handleTestResultsPress = async () => {
+    setIsSubmitting(true);
+    try {
+      await updateExamination();
+      await updateMedicalRecord();
+    } catch (error) {
+      console.error('Error updating data:', error);
+      alert('Failed to update data');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    try {
+      await handleTestResultsPress();
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
   useEffect(() => {
-    if (examination.bloodPressure <= 90) {
+    if (examination.bloodPressure <= 25) {
+      setBloodPressureInformation("Hipotensi Krisis");
+      setBloodPressureFontColor("text-red-500");
+    } else if (examination.bloodPressure > 25 && examination.bloodPressure <= 90) {
       setBloodPressureInformation("Hipotensi");
       setBloodPressureFontColor("text-secondary-100");
     } else if (examination.bloodPressure > 90 && examination.bloodPressure <= 119) {
@@ -68,7 +96,7 @@ const HasilTes = () => {
   }, [examination.oxygenSaturation]);
 
   useEffect(() => {
-    if (examination.heartRate <= 60) {
+    if (examination.heartRate > 25 && examination.heartRate <= 60) {
       setHeartRateInformation("Sangat Baik");
       setHeartRateFontColor("text-green-500");
     } else if (examination.heartRate > 60 && examination.heartRate <= 69) {
@@ -92,7 +120,12 @@ const HasilTes = () => {
       source={images.texture}
       >
         <SafeAreaView className="h-full">
-          <ScrollView contentContainerStyle={{ height: '100vh' }}>
+          <ScrollView 
+            contentContainerStyle={{ height: '100vh' }}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+          >
             <HeaderMenu 
               title="Hasil Tes"
               isLoading={isSubmitting}

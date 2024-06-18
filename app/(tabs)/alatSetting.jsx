@@ -12,6 +12,7 @@ import Slider from '@react-native-community/slider';
 
 import { updateSettings, getCurrentUser } from "../../lib/appwrite";
 import CustomButton from "../../components/CustomButton";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const AlatSetting = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
