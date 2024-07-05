@@ -15,7 +15,8 @@
     },
     "ios": {
       "supportsTablet": true,
-      "package": "com.pkm2024.arteri"
+      "package": "com.pkm2024.arteri",
+      "bundleIdentifier": "com.pkm2024.arteri"
     },
     "android": {
       "adaptiveIcon": {
@@ -49,6 +50,12 @@
         "projectId": "eff80b07-5b52-492c-9657-5e4a794a9b25"
       }
     },
-    "owner": "arteriapps"
+    "owner": "arteriapps",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/eff80b07-5b52-492c-9657-5e4a794a9b25"
+    }
   }
 }

@@ -10,7 +10,7 @@ import { getCurrentUser, signIn } from '../../lib/appwrite'
 import { useGlobalContext } from '../../context/GlobalProvider'
 
 const SignIn = () => {
-  const { setUser, setIsLoggedIn } = useGlobalContext();
+  const { setUser, setIsLoggedIn, updateExamination, updateMedicalRecord, updateNoteMedicalRecord } = useGlobalContext();
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [form, setForm] = useState({
@@ -32,6 +32,11 @@ const SignIn = () => {
       setIsLoggedIn(true);
 
       Alert.alert("Success", "User Signed in successfully")
+
+      await updateExamination();
+      await updateMedicalRecord();
+      await updateNoteMedicalRecord();
+
       router.replace('/home')
     } catch (error) {
       Alert.alert('Error', error.message)
