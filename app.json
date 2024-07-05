@@ -40,6 +40,15 @@
       "color": "#000000",
       "androidMode": "default",
       "androidCollapsedTitle": "New notifications"
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "eff80b07-5b52-492c-9657-5e4a794a9b25"
+      }
+    },
+    "owner": "arteriapps"
   }
 }
