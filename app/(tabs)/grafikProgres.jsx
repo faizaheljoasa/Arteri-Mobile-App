@@ -56,10 +56,10 @@ const GrafikProgres = () => {
     const { dataset, index } = data;
     const selectedValue = dataset.data[index];
     const label = chartData.labels[index];
-    const dataType = dataset.legend; // Menyimpan jenis data (Tekanan Darah, Saturasi Oksigen, atau Detak Jantung)
+    const dataType = dataset.legend; 
     setSelectedData({ value: selectedValue, label, type: dataType });
     setTimeout(() => {
-      setSelectedData(null); // Menghapus data terpilih setelah 2 detik
+      setSelectedData(null);
     }, 2000);
   };
 

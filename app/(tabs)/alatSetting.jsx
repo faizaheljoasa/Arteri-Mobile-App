@@ -87,7 +87,7 @@ const AlatSetting = () => {
             <View className="w-full items-center h-full px-4">
               <HeaderProfile />
 
-              <Text className="text-lg font-bold mb-4 mt-4">Mulai Pemeriksaan</Text>
+              <Text className="text-lg font-bold mb-4 mt-4">Mulai Terapi</Text>
               <TouchableOpacity
                 onPress={handleUpdateSettings}
                 activeOpacity={0.7}

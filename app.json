@@ -1,14 +1,15 @@
 {
   "expo": {
-    "name": "arteri-app",
+    "name": "Arteri App",
     "slug": "arteri-app",
+    "description": "Arteri Apps PKM UGM 2024",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/iconArteri.png",
     "scheme": "arteri",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splashArteri.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

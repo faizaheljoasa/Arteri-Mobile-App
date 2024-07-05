@@ -7,11 +7,11 @@ import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 import { Redirect, router, Link } from "expo-router";
 
-import { createUser } from '../../lib/appwrite'
+import { createData, createUser, updateHasilTest } from '../../lib/appwrite'
 import { useGlobalContext } from '../../context/GlobalProvider'
 
 const SignUp = () => {
-  const { setUser, setIsLoggedIn } = useGlobalContext();
+  const { setUser, setIsLoggedIn, updateExamination, updateMedicalRecord, updateNoteMedicalRecord } = useGlobalContext();
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [form, setForm] = useState({
@@ -31,6 +31,26 @@ const SignUp = () => {
       const result = await createUser(form.username, form.email, form.password)
       setUser(result);
       setIsLoggedIn(true);
+
+      const newData = {
+        bloodPressure: parseInt(0),
+        oxygenSaturation: parseInt(0),
+        heartRate: parseInt(0),
+        date: new Date().toISOString(),
+      }
+
+      const hasilTest = {
+        bloodPressure: parseInt(0),
+        oxygenSaturation: parseInt(0),
+        heartRate: parseInt(0),
+      };
+
+      await createData(newData);
+      await updateHasilTest(hasilTest);
+
+      await updateExamination();
+      await updateMedicalRecord();
+      await updateNoteMedicalRecord();
 
       router.replace('/home')
     } catch (error) {

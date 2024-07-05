@@ -83,7 +83,7 @@ const Home = () => {
                 />
               </View>
 
-              <MenuButton 
+              <MenuButton
                 title="Hasil Tes"
                 handlePress={() => router.push('/hasilTes')}
                 containerStyles="mt-7"

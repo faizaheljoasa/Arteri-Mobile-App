@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getCurrentUser, getExamination, getAllData } from "../lib/appwrite";
+import { getCurrentUser, getExamination, getAllData, getAllNote } from "../lib/appwrite";
 
 const GlobalContext = createContext();
 export const useGlobalContext = () => useContext(GlobalContext);
@@ -10,6 +10,7 @@ const GlobalProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [examination, setExamination] = useState(null)
   const [medicalRecord, setMedicalRecord] = useState([]);
+  const [noteMedicalRecord, setNoteMedicalRecord] = useState([]);
 
   useEffect(() => {
     getCurrentUser()
@@ -68,6 +69,25 @@ const GlobalProvider = ({ children }) => {
       })
   }, []);
 
+  useEffect(() => {
+    getAllNote()
+      .then((res) => {
+        if(res) {
+          setIsLoggedIn(true)
+          setNoteMedicalRecord(res)
+        } else {
+          setIsLoggedIn(false)
+          setNoteMedicalRecord(null)
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }, []);
+
   const updateUser = async () => {
     try {
       const currentUser = await getCurrentUser();
@@ -95,6 +115,15 @@ const GlobalProvider = ({ children }) => {
     }
   };
 
+  const updateNoteMedicalRecord = async () => {
+    try {
+      const noteMedicalRecord = await getAllNote();
+      setNoteMedicalRecord(noteMedicalRecord);
+    } catch (error) {
+      console.error('Failed to fetch medical record:', error);
+    }
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -106,10 +135,13 @@ const GlobalProvider = ({ children }) => {
         setExamination,
         medicalRecord,
         setMedicalRecord,
+        noteMedicalRecord,
+        setNoteMedicalRecord,
         isLoading,
         updateUser,
         updateExamination,
         updateMedicalRecord,
+        updateNoteMedicalRecord,
       }}
     >
       {children}
