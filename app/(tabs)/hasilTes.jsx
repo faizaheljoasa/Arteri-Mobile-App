@@ -1,7 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { Image, ImageBackground, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, ImageBackground, RefreshControl, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Link, Redirect, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import { updateHasilTest } from "../../lib/appwrite";
 
 import { icons, images } from "../../constants"
 import HeaderMenu from "../../components/HeaderMenu";
@@ -64,38 +66,61 @@ const HasilTes = () => {
     }
   };
 
+  const handleUpdateHasilTest = async () => {
+    try {
+      setIsSubmitting(true);
+
+      const hasilTest = {
+        readSensors: 'on',
+      };
+
+      await updateHasilTest(hasilTest);
+
+      Alert.alert('Hasil Test updated successfully');
+      
+      await updateExamination();
+      await updateMedicalRecord();
+
+    } catch (error) {
+      console.error('Error updating hasil test:', error);
+      Alert.alert('Failed to update hasil test');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   useEffect(() => {
-    if (examination.bloodPressure <= 89) {
+    if (examination.bloodSYS <= 89) {
       setBloodPressureInformation("Hipotensi Krisis");
       setBloodPressureFontColor("text-red-500");
       setValueForBloodPresure(recommendationBloodPresure.hipotensiKrisis.value);
       setSymptomForBloodPresure(recommendationBloodPresure.hipotensiKrisis.symptom);
       setRecommendationForBloodPresure(recommendationBloodPresure.hipotensiKrisis.recommendation);
-    } else if (examination.bloodPressure > 89 && examination.bloodPressure <= 100) {
+    } else if (examination.bloodSYS > 89 && examination.bloodSYS <= 100) {
       setBloodPressureInformation("Hipotensi");
       setBloodPressureFontColor("text-secondary-100");
       setValueForBloodPresure(recommendationBloodPresure.hipotensi.value);
       setSymptomForBloodPresure(recommendationBloodPresure.hipotensi.symptom);
       setRecommendationForBloodPresure(recommendationBloodPresure.hipotensi.recommendation);
-    } else if (examination.bloodPressure > 100 && examination.bloodPressure <= 120) {
+    } else if (examination.bloodSYS > 100 && examination.bloodSYS <= 120) {
       setBloodPressureInformation("Normal");
       setBloodPressureFontColor("text-green-500");
       setValueForBloodPresure(recommendationBloodPresure.normal.value);
       setSymptomForBloodPresure(recommendationBloodPresure.normal.symptom);
       setRecommendationForBloodPresure(recommendationBloodPresure.normal.recommendation);
-    } else if (examination.bloodPressure > 120 && examination.bloodPressure <= 139) {
+    } else if (examination.bloodSYS > 120 && examination.bloodSYS <= 139) {
       setBloodPressureInformation("Prahipertensi");
       setBloodPressureFontColor("text-secondary-100");
       setValueForBloodPresure(recommendationBloodPresure.prahipertensi.value);
       setSymptomForBloodPresure(recommendationBloodPresure.prahipertensi.symptom);
       setRecommendationForBloodPresure(recommendationBloodPresure.prahipertensi.recommendation);
-    } else if (examination.bloodPressure > 139 && examination.bloodPressure <= 159) {
+    } else if (examination.bloodSYS > 139 && examination.bloodSYS <= 159) {
       setBloodPressureInformation("Hipertensi Tahap 1");
       setBloodPressureFontColor("text-secondary-100");
       setValueForBloodPresure(recommendationBloodPresure.hipertensi1.value);
       setSymptomForBloodPresure(recommendationBloodPresure.hipertensi1.symptom);
       setRecommendationForBloodPresure(recommendationBloodPresure.hipertensi1.recommendation);
-    } else if (examination.bloodPressure > 159 && examination.bloodPressure <= 180) {
+    } else if (examination.bloodSYS > 159 && examination.bloodSYS <= 180) {
       setBloodPressureInformation("Hipertensi Tahap 2");
       setBloodPressureFontColor("text-red-500");
       setValueForBloodPresure(recommendationBloodPresure.hipertensi2.value);
@@ -108,7 +133,7 @@ const HasilTes = () => {
       setSymptomForBloodPresure(recommendationBloodPresure.hipertensiKrisis.symptom);
       setRecommendationForBloodPresure(recommendationBloodPresure.hipertensiKrisis.recommendation);
     }
-  }, [examination.bloodPressure]);
+  }, [examination.bloodSYS]);
 
   useEffect(() => {
     if (examination.oxygenSaturation > 70 && examination.oxygenSaturation <= 85) {
@@ -241,7 +266,7 @@ const HasilTes = () => {
                     <View className="w-full h-full flex flex-col mt-4">
                       <View className="w-full flex flex-col justify-center items-center">
                         <TouchableOpacity
-                          onPress={() => router.push('/alatSetting')}
+                          onPress={handleUpdateHasilTest}
                           activeOpacity={0.7}
                         >
                           <Image
@@ -265,13 +290,24 @@ const HasilTes = () => {
                             className="w-[64px] h-[64px]"
                             resizeMode="contain"
                           />
-                          <View className="flex flex-row">
-                            <Text className="text-md text-white">Tekanan Darah: </Text>
-                            {examination ? (
-                              <Text className="text-md text-white font-bold">{'   '}{examination.bloodPressure} mmHg</Text>
-                            ) : (
-                              <Text className="text-md text-white font-bold">{'   '} - mmHg</Text>
-                            )}
+                          <View className="flex flex-col">
+                            <View className="flex flex-row">
+                              <Text className="text-md text-white">Tekanan Sistolik   : </Text>
+                              {examination ? (
+                                <Text className="text-md text-white font-bold">{'   '}{examination.bloodSYS} mmHg</Text>
+                              ) : (
+                                <Text className="text-md text-white font-bold">{'   '} - mmHg</Text>
+                              )}
+                            </View>
+                            <View className="flex flex-row">
+                              <Text className="text-md text-white">Tekanan Diastolik : </Text>
+                              {examination ? (
+                                <Text className="text-md text-white font-bold">{'   '}{examination.bloodDIA} mmHg</Text>
+                              ) : (
+                                <Text className="text-md text-white font-bold">{'   '} - mmHg</Text>
+                              )}
+                            </View>
+
                           </View>
                         </View>
                       </View>

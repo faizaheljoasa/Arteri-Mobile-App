@@ -18,9 +18,11 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 const ApiHasilTest = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [bloodPressure, setBloodPressure] = useState(0);
+  const [bloodPressureSystolic, setBloodPressureSystolic] = useState(0);
+  const [bloodPressureDiastolic, setBloodPressureDiastolic] = useState(0);
   const [oxygenSaturation, setOxygenSaturation] = useState(0);
   const [heartRate, setHeartRate] = useState(0);
+  const [readSensor, setReadSensor] = useState('');
 
   const { updateExamination, updateMedicalRecord } = useGlobalContext();
 
@@ -29,16 +31,19 @@ const ApiHasilTest = () => {
       setIsSubmitting(true);
 
       const newData = {
-        bloodPressure: parseInt(bloodPressure),
+        bloodPressure: parseInt(bloodPressureSystolic),
         oxygenSaturation: parseInt(oxygenSaturation),
         heartRate: parseInt(heartRate),
         date: new Date().toISOString(),
       }
 
       const hasilTest = {
-        bloodPressure: parseInt(bloodPressure),
+        bloodPressure: parseInt(bloodPressureSystolic),
         oxygenSaturation: parseInt(oxygenSaturation),
         heartRate: parseInt(heartRate),
+        bloodSYS: parseInt(bloodPressureSystolic),
+        bloodDIA: parseInt(bloodPressureDiastolic),
+        readSensors: readSensor,
       };
 
       await createData(newData);
@@ -49,9 +54,11 @@ const ApiHasilTest = () => {
       await updateExamination();
       await updateMedicalRecord();
 
-      setBloodPressure('');
+      setBloodPressureSystolic('');
+      setBloodPressureDiastolic('');
       setOxygenSaturation('');
       setHeartRate('');
+      setReadSensor('')
     } catch (error) {
       console.error('Error updating hasil test:', error);
       Alert.alert('Failed to update hasil test');
@@ -77,9 +84,16 @@ const ApiHasilTest = () => {
                 <TextInput
                   className="border border-gray-300 rounded-lg p-6 text-center w-full text-white mb-2 bg-purple-100"
                   keyboardType="numeric"
-                  value={bloodPressure ? String(bloodPressure) : 0}
-                  onChangeText={setBloodPressure}
-                  placeholder="Tekanan Darah"
+                  value={bloodPressureSystolic ? String(bloodPressureSystolic) : 0}
+                  onChangeText={setBloodPressureSystolic}
+                  placeholder="Tekanan Darah Sistolik"
+                />
+                <TextInput
+                  className="border border-gray-300 rounded-lg p-6 text-center w-full text-white mb-2 bg-purple-100"
+                  keyboardType="numeric"
+                  value={bloodPressureDiastolic ? String(bloodPressureDiastolic) : 0}
+                  onChangeText={setBloodPressureDiastolic}
+                  placeholder="Tekanan Darah Diastolik"
                 />
                 <TextInput
                   className="border border-gray-300 rounded-lg p-6 text-center w-full text-white mb-2 bg-purple-100"
@@ -94,6 +108,13 @@ const ApiHasilTest = () => {
                   value={heartRate ? String(heartRate) : 0}
                   onChangeText={setHeartRate}
                   placeholder="Denyut Jantung"
+                />
+                <TextInput
+                  className="border border-gray-300 rounded-lg p-6 text-center w-full text-white mb-2 bg-purple-100"
+                  keyboardType="default"
+                  value={readSensor ? String(readSensor) : ''}
+                  onChangeText={setReadSensor}
+                  placeholder="Pembacaan Sensor"
                 />
               </View>
 
